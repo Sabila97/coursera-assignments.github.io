@@ -29,16 +29,11 @@ h5 {
 
 }
 
-.col-md-12 {
+.box {
     width: 97.5%;
 }
 
-.col-sm-12 {
-    width: 97%;
-     margin-right: auto;
-    margin-left: auto;
 
-}
 p {
     width: 120px;
     color: black;
