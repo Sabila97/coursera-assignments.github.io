@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'News Cycle', sans-serif;
+}
+
+h5 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 175%;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.row {
+    width: 100%;
+}
+
+.col {
+    background-color: gray;
+    border: 2px solid black;
+    margin-bottom: 10px;
+    width: 95%;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.box {
+    width: 97.5%;
+}
+
+p {
+    width: 120px;
+    color: black;
+    border: 2px solid black;
+    font-size: 125%;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+vertical-align: baseline;
+}
+
+section {
+    position: relative;
+    font-size: 80%;
+    padding: 10px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+#chicken {
+    background-color: lightcoral;
+}
+
+#beef {
+    background-color: brown;
+    color: white;
+}
+
+#sushi {
+    background-color: bisque;
+}
+
+
+/*Large Devices*/
+@media (min-width: 992px) {
+    .col-lg-4 {
+        float: left;
+        border: 1px solid none;
+        width: 33.33%;
+    }
+
+}
+
+/*Medium Devices*/
+@media (min-width:768px) and (max-width:991px) {
+
+    .col-md-6,
+    .col-md-12 {
+        float: left;
+        border: 1px solid none;
+    }
+
+    .col-md-6 {
+/*        border: 1px solid none;*/
+        width: 50%;
+    }
+
+    .col-md-12 {
+        width: 100%;
+    
+    }
+}
