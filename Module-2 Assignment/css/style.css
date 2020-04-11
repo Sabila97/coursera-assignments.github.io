@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -29,9 +31,6 @@ h5 {
 
 }
 
-.box {
-    width: 97.5%;
-}
 
 
 p {
@@ -95,7 +94,12 @@ section {
     }
 
     .col-md-12 {
+        
         width: 100%;
     
+    }
+    
+    .box {
+        width: 97.5%;
     }
 }
