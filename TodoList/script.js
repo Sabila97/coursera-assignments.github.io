@@ -216,7 +216,7 @@ var view = {
 var todoUl = document.querySelector("ul");
 
 todoUl.addEventListener("click", function(event){
-    console.log(event);
+    console.log(event.target.parentNode.id);
 });
 
 //var exampleElement = $0;
