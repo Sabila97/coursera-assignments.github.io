@@ -101,23 +101,46 @@ var todoList = {
         //If everything's true, make it false
         var totalTodos = this.todos.length;
         var completedTodos = 0;
-        for (var i = 0; i < totalTodos; i++) {
-            if (this.todos[i].completed === true) {
+//        for (var i = 0; i < totalTodos; i++) {
+//            if (this.todos[i].completed === true) {
+//                completedTodos++;
+//            }
+//        }
+        
+        this.todos.forEach(function(todo){
+            if(todo.completed === true){
                 completedTodos++;
+            }   
+        })
+        
+//        if (completedTodos === totalTodos) {
+////            for (var i = 0; i < totalTodos; i++) {
+////                this.todos[i].completed = false;
+////            }
+//            
+//            this.todos.forEach(function(todo){
+//                todo.completed = false;
+//            })
+//        }
+//        //Otherwise, make it true
+//        else {
+////            for (var i = 0; i < totalTodos; i++) {
+////                this.todos[i].completed = true;
+////            }
+//            this.todos.forEach(function(){
+//                todo.completed = true;
+//            })
+//        }
+//        //        this.displayTodos();
+        
+        this.todos.forEach(function(todo){
+            if(completedTodos === totalTodos){
+              todo.completed = false;  
             }
-        }
-        if (completedTodos === totalTodos) {
-            for (var i = 0; i < totalTodos; i++) {
-                this.todos[i].completed = false;
+            else{
+               todo.completed = true; 
             }
-        }
-        //Otherwise, make it true
-        else {
-            for (var i = 0; i < totalTodos; i++) {
-                this.todos[i].completed = true;
-            }
-        }
-        //        this.displayTodos();
+        })
 
     }
 };
@@ -158,10 +181,10 @@ var handlers = {
         view.displayTodo();
 
     },
-    deleteTodo: function () {
-        var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
-        todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
-        deleteTodoPositionInput.value = "";
+    deleteTodo: function (position) {
+        //        var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
+        todoList.deleteTodo(position);
+        //        deleteTodoPositionInput.value = "";
         view.displayTodo();
     },
     toggleCompleted: function () {
@@ -187,63 +210,68 @@ var view = {
     displayTodo: function () {
         var todoUl = document.querySelector("ul");
         todoUl.innerHTML = "";
-        for (var i = 0; i < todoList.todos.length; i++) {
-            var todoLi = document.createElement("li");
-            var todo = todoList.todos[i];
+//        for (var i = 0; i < todoList.todos.length; i++) {
+//            var todoLi = document.createElement("li");
+//            var todo = todoList.todos[i];
+//            var todoWithCompletion = "";
+//            if (todo.completed === true) {
+//                todoWithCompletion = "(x) " + todo.todoText;
+//            } else {
+//                todoWithCompletion = "( ) " + todo.todoText;
+//            }
+//            todoLi.id = i;
+//
+//            todoLi.textContent = todoWithCompletion;
+//            todoLi.appendChild(this.createDeleteButton());
+//            todoUl.appendChild(todoLi);
+//        }
+        todoList.todos.forEach(function(todo, position){
+          var todoLi = document.createElement("li");
             var todoWithCompletion = "";
-            if (todo.completed === true) {
+             if (todo.completed === true) {
                 todoWithCompletion = "(x) " + todo.todoText;
             } else {
                 todoWithCompletion = "( ) " + todo.todoText;
             }
-            todoLi.id = i;
-
+            todoLi.id = position;
             todoLi.textContent = todoWithCompletion;
             todoLi.appendChild(this.createDeleteButton());
             todoUl.appendChild(todoLi);
-        }
+        },this);//beacuse any callback function doesn't call the higher order function
+        // So to call the higher order function this argument is necessary
+        
     },
-    createDeleteButton: function(){
+    createDeleteButton: function () {
         var deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         deleteButton.className = "deleteButton";
         return deleteButton;
-        
+
     },
-    
+    setUpEventListener: function () {
+//        debugger;
+        var todoUl = document.querySelector("ul");
+
+        todoUl.addEventListener("click", function (event) {
+            console.log(event);
+            //    console.log(event.target.parentNode.id);
+            //Get the element that was clicked on.
+            var elementClicked = event.target;
+            //Check if the elementClicked is a delete button.
+            if (elementClicked.className === "deleteButton") {
+                //Run handler.deleteTodo(position)
+                handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+
+            }
+        });// We can use a single eventListener just by putting it into the parent node (here in ul tag)
+    }
+
 };
 
-var todoUl = document.querySelector("ul");
-
-todoUl.addEventListener("click", function(event){
-    console.log(event.target.parentNode.id);
-});
+view.setUpEventListener();// because the other functions are automatically called but this function isn't yet 
 
 //var exampleElement = $0;
 //exampleElement.addEventListener("click", function(event){
 //console.log(event);
 //console.log("Example was clicked");
 //});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
